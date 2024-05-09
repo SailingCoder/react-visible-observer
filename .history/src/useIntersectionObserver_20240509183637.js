@@ -1,5 +1,5 @@
 // useIntersectionObserver.js
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 const useIntersectionObserver = (ref, onVisibilityChange, onEntryUpdate, options = {
     root: null, 
@@ -43,6 +43,4 @@ const useIntersectionObserver = (ref, onVisibilityChange, onEntryUpdate, options
     }, [ref, onVisibilityChange, onEntryUpdate, options]);
   
     return observerRef;
-};
-
-export default useIntersectionObserver;
+  };

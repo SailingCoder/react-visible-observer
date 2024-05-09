@@ -1,46 +1,49 @@
-// VisibleObserver.js
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 
-const VisibleObserver = ({
-    children,
-    onVisibilityChange,
+const VisibleObserver = ({ 
+    children, 
+    onVisibilityChange, 
     onEntryUpdate,
-    root = null,
-    rootMargin = '0px',
-    threshold = 0.1,
-    ...props
+    root = null, 
+    rootMargin = '0px', 
+    threshold = 0.1, 
+    ...props 
 }) => {
     const elementRef = useRef(null);
     const [visibility, setVisibility] = useState(null);
-
-    const handleObserverUpdate = useCallback((isVisible, entry) => {
+  
+    const handleVisible = useCallback((isVisible, entry) => {
+      if (onVisibilityChange) onVisibilityChange(isVisible, entry);
+    }, [onVisibilityChange]);
+  
+    const handleEntryUpdate = useCallback((isVisible, entry) => {
       if (onEntryUpdate) onEntryUpdate(isVisible, entry);
-      if (isVisible !== visibility) {
-        setVisibility(isVisible);
-        if (onVisibilityChange) onVisibilityChange(isVisible, entry);
-      }
-    }, [onEntryUpdate, onVisibilityChange, visibility]);
-
+    }, [onEntryUpdate]);
+  
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                handleObserverUpdate(entry.isIntersecting, entry);
-            });
+          entries.forEach(entry => {
+            handleEntryUpdate(entry.isIntersecting, entry)
+            if (entry.isIntersecting !== visibility) {
+              setVisibility(entry.isIntersecting);
+              handleVisible(entry.isIntersecting, entry);
+            }
+          });
         }, { root, rootMargin, threshold });
-
+  
         const currentElement = elementRef.current;
         if (currentElement) {
             observer.observe(currentElement);
         }
-
+  
         return () => {
-            if (currentElement) {
-                observer.unobserve(currentElement);
-            }
-            observer.disconnect();
+          if (currentElement) {
+              observer.unobserve(currentElement);
+          }
+          observer.disconnect();
         };
-    }, [root, rootMargin, threshold, handleObserverUpdate]);
-
+    }, [root, rootMargin, threshold, handleVisible]);
+  
     return (
         <div ref={elementRef} {...props}>
             {children}

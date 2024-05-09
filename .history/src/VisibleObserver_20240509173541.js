@@ -1,4 +1,3 @@
-// VisibleObserver.js
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 const VisibleObserver = ({

@@ -1,7 +1,7 @@
 import VisibleObserver from './VisibleObserver';
 import useIntersectionObserver from './useIntersectionObserver';
 
-export { useIntersectionObserver };
+export { VisibleObserver, useIntersectionObserver };
 export default VisibleObserver;
 
 
