@@ -17,37 +17,13 @@ npm install react-visible-observer
 yarn add react-visible-observer
 ```
 
-## API
-
-`useIntersectionObserver(ref, onVisibilityChange, onEntryUpdate, options)`
-
-参数:
-
--   `ref` (React.RefObject): 要观察的DOM元素的ref。
--   `onVisibilityChange` (Function): 当观察的元素从不可见变为可见或从可见变为不可见时调用。接受两个参数：
-    -   `isVisible` (boolean) ：元素是否可见；
-    -   `entry` (IntersectionObserverEntry)：提供了有关交叉观察事件的详细信息。`entry` 包含了以下属性：
-        1.  boundingClientRect: 一个 `DOMRectReadOnly` 对象，表示目标元素的边界框的当前大小和位置，以视口坐标系为基准。
-        1.  intersectionRatio: 一个浮点数，表示目标元素的可见比例。当元素完全可见时，此值为 1.0，当元素不可见时，此值为 0.0。
-        1.  intersectionRect: 一个 `DOMRectReadOnly` 对象，表示目标元素与交叉区域的交叉区域的大小和位置，以视口坐标系为基准。
-        1.  isIntersecting: 一个布尔值，表示目标元素是否与其所设置的根元素（如果存在）相交，即是否处于交叉状态。当元素进入视窗或与根元素相交时，值为 `true`，否则为 `false`。
-        1.  rootBounds: 一个 `DOMRectReadOnly` 对象，表示根元素的边界框的大小和位置，以视口坐标系为基准。如果没有设置根元素，则此值为 `null`。
-        1.  target: 一个 `Element` 对象，表示观察器正在观察的目标元素。
-        1.  time: 一个浮点数，表示发生交叉的时间戳，以毫秒为单位。
--   `onEntryUpdate` (Function): 当有任何更新时调用，无论元素是否可见。接受一个参数：`entry` (IntersectionObserverEntry)。
--   `options` (Object): IntersectionObserver的配置选项。默认值为 `{ root: null, rootMargin: '0px', threshold: 0.1 }`。
-    -   `root`: 观察者的根元素。默认值 null，使用视口作为根元素。
-    -   `rootMargin`: 字符串，用于指定根元素的外边距。这对应用增加或减少被视为视口的区域非常有用。
-    -   `threshold`: 一个数字或数字数组，定义了目标可见性的百分比，触发回调的阈值。例如：[0.1, 0.5, 1]
-
-
-## 代码示例
+## 快速开始
 
 ### 1、监控单个元素
 
 ```jsx
 import React, { useRef } from 'react';
-import useIntersectionObserver from 'use-intersection-observer';
+import { useIntersectionObserver } from 'use-intersection-observer';
 
 const MyComponent = () => {
   const ref = useRef(null);
@@ -95,3 +71,27 @@ const MyComponent = () => {
 
 export default MyComponent;
 ```
+
+
+## API
+
+`useIntersectionObserver(ref, onVisibilityChange, onEntryUpdate, options)`
+
+参数:
+
+-   `ref` (React.RefObject): 要观察的DOM元素的ref。
+-   `onVisibilityChange` (Function): 当观察的元素从不可见变为可见或从可见变为不可见时调用。接受两个参数：
+    -   `isVisible` (boolean) ：元素是否可见；
+    -   `entry` (IntersectionObserverEntry)：提供了有关交叉观察事件的详细信息。`entry` 包含了以下属性：
+        1.  boundingClientRect: 一个 `DOMRectReadOnly` 对象，表示目标元素的边界框的当前大小和位置，以视口坐标系为基准。
+        1.  intersectionRatio: 一个浮点数，表示目标元素的可见比例。当元素完全可见时，此值为 1.0，当元素不可见时，此值为 0.0。
+        1.  intersectionRect: 一个 `DOMRectReadOnly` 对象，表示目标元素与交叉区域的交叉区域的大小和位置，以视口坐标系为基准。
+        1.  isIntersecting: 一个布尔值，表示目标元素是否与其所设置的根元素（如果存在）相交，即是否处于交叉状态。当元素进入视窗或与根元素相交时，值为 `true`，否则为 `false`。
+        1.  rootBounds: 一个 `DOMRectReadOnly` 对象，表示根元素的边界框的大小和位置，以视口坐标系为基准。如果没有设置根元素，则此值为 `null`。
+        1.  target: 一个 `Element` 对象，表示观察器正在观察的目标元素。
+        1.  time: 一个浮点数，表示发生交叉的时间戳，以毫秒为单位。
+-   `onEntryUpdate` (Function): 当有任何更新时调用，无论元素是否可见。接受一个参数：`entry` (IntersectionObserverEntry)。
+-   `options` (Object): IntersectionObserver的配置选项。默认值为 `{ root: null, rootMargin: '0px', threshold: 0.1 }`。
+    -   `root`: 观察者的根元素。默认值 null，使用视口作为根元素。
+    -   `rootMargin`: 字符串，用于指定根元素的外边距。这对应用增加或减少被视为视口的区域非常有用。
+    -   `threshold`: 一个数字或数字数组，定义了目标可见性的百分比，触发回调的阈值。例如：[0.1, 0.5, 1]
