@@ -29,7 +29,11 @@ const useIntersectionObserver = (ref, onVisibilityChange, onEntryUpdate, options
     
       if (nodes) {
         if (Array.isArray(nodes)) {
-          nodes.forEach(node => observerRef.current.observe(node));
+          nodes.forEach(node => {
+            if (node) {
+              observerRef.current.observe(node);
+            }
+          });
         } else {
           observerRef.current.observe(nodes);
         }
