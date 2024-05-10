@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "Sailing",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.24.5",
