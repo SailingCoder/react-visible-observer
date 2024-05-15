@@ -22,7 +22,7 @@ yarn add react-visible-observer
 
 这里提供了两种实用的封装方式，适应不同的使用场景：
 
-[1. React 自定义钩子（推荐使用，很灵活）](./doc/README_HOOKS.md)
+[1. React 自定义钩子（推荐使用，很灵活）](https://github.com/SailingCoder/react-visible-observer/blob/main/doc/README_HOOKS.md)
 
 快速入手
 
@@ -48,7 +48,9 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
-[2. React 组件实现](./doc/README_COMPONENT.md)
+更多详情请参阅文档：[README_HOOKS](https://github.com/SailingCoder/react-visible-observer/blob/main/doc/README_HOOKS.md)。
+
+[2. React 组件实现](https://github.com/SailingCoder/react-visible-observer/blob/main/doc/README_HOOKS.md)
 
 ```jsx
 import React from 'react';
@@ -76,6 +78,7 @@ const App = () => {
 
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
+更多详情请参阅文档：[README_HOOKS](https://github.com/SailingCoder/react-visible-observer/blob/main/doc/README_COMPONENT.md)。
 
 ## 许可证
 
