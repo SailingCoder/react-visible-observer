@@ -1,6 +1,6 @@
 {
   "name": "react-visible-observer",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "",
   "main": "lib/bundle.cjs.js",
   "module": "lib/bundle.esm.js",
