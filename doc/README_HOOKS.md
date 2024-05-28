@@ -1,11 +1,10 @@
 # React Visible Observer
 
+**React Visible Observer** 是一个基于 Intersection Observer API 的 React 组件库，专为监控元素何时进入或离开视口（`可视区域`）而设计。此库可以在元素变得可见或不可见时触发回调函数，非常适合用于实现懒加载、动画触发以及其他依赖于元素可见性的交互功能。
+
 ![npm version](https://img.shields.io/npm/v/react-visible-observer)
 
-
 [Read English](https://github.com/SailingCoder/react-visible-observer/blob/main/README.md)
-
-**React Visible Observer** 是一个基于 Intersection Observer API 的 React 组件库，专为监控元素何时进入或离开视口（`可视区域`）而设计。此库可以在元素变得可见或不可见时触发回调函数，非常适合用于实现懒加载、动画触发以及其他依赖于元素可见性的交互功能。
 
 ## 安装
 

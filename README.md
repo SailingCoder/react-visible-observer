@@ -1,12 +1,14 @@
 
 # React Visible Observer
 
+
+**React Visible Observer** is a React component library based on the Intersection Observer API, designed to monitor when elements enter or leave the viewport (`visible area`). This library can trigger callback functions when elements become visible or invisible, making it ideal for implementing lazy loading, animation triggering, and other interactive features dependent on element visibility.
+
+
 ![npm version](https://img.shields.io/npm/v/react-visible-observer)
 
 
 [简体中文](https://github.com/SailingCoder/react-visible-observer/blob/main/doc/README_HOOKS.md)
-
-**React Visible Observer** is a React component library based on the Intersection Observer API, designed to monitor when elements enter or leave the viewport (`visible area`). This library can trigger callback functions when elements become visible or invisible, making it ideal for implementing lazy loading, animation triggering, and other interactive features dependent on element visibility.
 
 ## Installation
 
