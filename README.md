@@ -1,35 +1,39 @@
+
 # React Visible Observer
 
 ![npm version](https://img.shields.io/npm/v/react-visible-observer)
 
-**React Visible Observer** 是一个基于 Intersection Observer API 的 React 组件库，专为监控元素何时进入或离开视口（`可视区域`）而设计。此库可以在元素变得可见或不可见时触发回调函数，非常适合用于实现懒加载、动画触发以及其他依赖于元素可见性的交互功能。
 
-## 安装
+[简体中文](https://github.com/SailingCoder/react-visible-observer/blob/main/doc/README_HOOKS.md)
 
-你可以通过 npm 或 yarn 来安装这个库：
+**React Visible Observer** is a React component library based on the Intersection Observer API, designed to monitor when elements enter or leave the viewport (`visible area`). This library can trigger callback functions when elements become visible or invisible, making it ideal for implementing lazy loading, animation triggering, and other interactive features dependent on element visibility.
+
+## Installation
+
+You can install this library via npm or yarn:
 
 ```bash
 npm install react-visible-observer
 ```
 
-或
+or
 
 ```bash
 yarn add react-visible-observer
 ```
 
-## 快速开始
+## Quick Start
 
-### 1、监控单个元素
+### 1. Monitor a Single Element
 
 ```jsx
 import React, { useRef } from 'react';
-import { useIntersectionObserver } from 'use-intersection-observer';
+import { useIntersectionObserver } from 'react-visible-observer';
 
 const MyComponent = () => {
   const ref = useRef(null);
   const onVisibilityChange = (isVisible) => {
-    console.log(`元素现在 ${isVisible ? '可见' : '不可见'}`);
+    console.log(`The element is now ${isVisible ? 'visible' : 'hidden'}`);
   };
 
   useIntersectionObserver(ref, onVisibilityChange);
@@ -44,18 +48,18 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
-### 2、监控元素列表，多用于滚动加载
+### 2. Monitor a List of Elements, Typically Used for Infinite Scrolling
 
 ```jsx
 import React, { useRef } from 'react';
-import useIntersectionObserver from 'use-intersection-observer';
+import useIntersectionObserver from 'react-visible-observer';
 
 const MyComponent = () => {
   const listRef = useRef([]);
 
   const onVisibilityChange = (isVisible, entry) => {
-    console.log(`元素现在 ${isVisible ? '可见' : '不可见'}`);
-    const id = entry.target.id; // 获取元素的ID
+    console.log(`The element is now ${isVisible ? 'visible' : 'hidden'}`);
+    const id = entry.target.id; // Get the ID of the element
     console.log(`${id} is now visible`);
   };
 
@@ -79,30 +83,29 @@ export default MyComponent;
 
 | **Option**           | **Description**                                                                                              | **Type**          | **Required** | **Default**                                         |
 | -------------------- | ----------------------------- | ----------------- | ------------ | --------------------------------------------------- |
-| `ref`                | 要观察的 DOM 元素的 ref。                                                                                            | `React.RefObject` or `Array[React.RefObject]` | **必填**       | 无                                                   |
-| `onVisibilityChange` | 当观察的元素从不可见变为可见或从可见变为不可见时调用。接受两个参数：`isVisible` (boolean) 表示元素是否可见，`entry` (IntersectionObserverEntry) 提供详细信息。 | `Function`        | **必填**          | `undefined`                                         |
-| `onEntryUpdate`      | 当有任何更新时调用，无论元素是否可见。接受一个参数：`entry` (IntersectionObserverEntry)。                                               | `Function`        | 可选           | `undefined`                                         |
-| `options`            | `IntersectionObserver` 的配置选项。                                                                                | `Object`          | 可选           | `{ root: null, rootMargin: '0px', threshold: 0.1 }` |
+| `ref`                | The ref of the DOM element(s) to observe.                                                                           | `React.RefObject` or `Array[React.RefObject]` | **Required**       | None                                                 |
+| `onVisibilityChange` | Callback function called when the observed element goes from invisible to visible or from visible to invisible. Receives two parameters: `isVisible` (boolean) indicating whether the element is visible, and `entry` (IntersectionObserverEntry) providing detailed information. | `Function`        | **Required**          | `undefined`                                         |
+| `onEntryUpdate`      | Callback function called when there is any update, whether the element is visible or not. Receives one parameter: `entry` (IntersectionObserverEntry).                                               | `Function`        | Optional           | `undefined`                                         |
+| `options`            | Configuration options for `IntersectionObserver`.                                                                                | `Object`          | Optional           | `{ root: null, rootMargin: '0px', threshold: 0.1 }` |
 
-### `options` 配置选项
+### `options` Configuration Options
 
 | **Option**   | **Description**                  | **Type**            | **Required** | **Default** |
 | ------------ | -------------------------------- | ------------------- | ------------ | ----------- |
-| `root`       | 观察者的根元素。默认值为 `null`，使用视口作为根元素。   | `Element`           | 可选           | `null`      |
-| `rootMargin` | 字符串，用于指定根元素的外边距。用于增加或减少被视为视口的区域。 | `String`            | 可选           | `'0px'`     |
-| `threshold`  | 数字或数字数组，定义了目标可见性的百分比，触发回调的阈值。    | `Number`or`Array` | 可选           | `0.1`       |
+| `root`       | The root element of the observer. Default is `null`, which uses the viewport as the root element.   | `Element`           | Optional           | `null`      |
+| `rootMargin` | A string specifying the margins of the root element. Used to increase or decrease the area considered as the viewport. | `String`            | Optional           | `'0px'`     |
+| `threshold`  | A number or an array of numbers defining the percentage of target visibility that triggers the callback.    | `Number`or`Array` | Optional           | `0.1`       |
 
-### `IntersectionObserverEntry` 属性
+### `IntersectionObserverEntry` Properties
 
-- `boundingClientRect`: 一个 `DOMRectReadOnly` 对象，表示目标元素的边界框的当前大小和位置，以视口坐标系为基准。 
-- `intersectionRatio`: 一个浮点数，表示目标元素的可见比例。当元素完全可见时，此值为 1.0，当元素不可见时，此值为 0.0。 
-- `intersectionRect`: 一个 `DOMRectReadOnly` 对象，表示目标元素与交叉区域的交叉区域的大小和位置，以视口坐标系为基准。 
-- `isIntersecting`: 一个布尔值，表示目标元素是否与其所设置的根元素（如果存在）相交，即是否处于交叉状态。当元素进入视窗或与根元素相交时，值为 `true`，否则为 `false`。 
-- `rootBounds`: 一个 `DOMRectReadOnly` 对象，表示根元素的边界框的大小和位置，以视口坐标系为基准。如果没有设置根元素，则此值为 `null`。 
-- `target`: 一个 `Element` 对象，表示观察器正在观察的目标元素。 
-- `time`: 一个浮点数，表示发生交叉的时间戳，以毫秒为单位。
+- `boundingClientRect`: A `DOMRectReadOnly` object representing the current size and position of the target element's bounding box in viewport coordinates. 
+- `intersectionRatio`: A floating-point number indicating the ratio of the intersection area to the target's bounding box or to the root's bounding box, depending on the value of the root property.
+- `intersectionRect`: A `DOMRectReadOnly` object representing the size and position of the intersection rectangle's intersection area.
+- `isIntersecting`: A Boolean value indicating whether the target element intersects with the root element.
+- `rootBounds`: A `DOMRectReadOnly` object representing the bounding box of the root element in viewport coordinates. If there is no root element, this value is `null`.
+- `target`: An `Element` object representing the target element being observed.
+- `time`: A floating-point number representing the time at which the intersection occurred, in milliseconds.
 
+## License
 
-## 许可证
-
-**React Visible Observer** 采用 MIT 许可证发布。欲了解更多许可信息，请参阅项目中的 [LICENSE](https://github.com/SailingCoder/react-visible-observer/blob/main/LICENSE) 文件。
+**React Visible Observer** is released under the MIT License. See the [LICENSE](https://github.com/SailingCoder/react-visible-observer/blob/main/LICENSE) file for details.
