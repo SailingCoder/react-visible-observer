@@ -54,15 +54,14 @@ export default MyComponent;
 
 ```jsx
 import React, { useRef } from 'react';
-import useIntersectionObserver from 'react-visible-observer';
+import { useIntersectionObserver } from 'react-visible-observer';
 
 const MyComponent = () => {
   const listRef = useRef([]);
 
   const onVisibilityChange = (isVisible, entry) => {
-    console.log(`The element is now ${isVisible ? 'visible' : 'hidden'}`);
-    const id = entry.target.id; // Get the ID of the element
-    console.log(`${id} is now visible`);
+    const id = entry.target.id; // 获取元素的ID
+    console.log(`${id} 元素现在 ${isVisible ? '可见' : '不可见'}`);
   };
 
   useIntersectionObserver(listRef, onVisibilityChange);
